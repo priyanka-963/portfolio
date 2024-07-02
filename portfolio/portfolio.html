@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priyanka's Portfolio</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('/path/to/your/font/file.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee9e5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #eee9e5;
+            color: black;
+            padding: 1em;
+            text-align: center;
+            position: relative;
+        }
+
+        header nav a {
+            color: black;
+            margin: 0 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header img {
+            width: 100%;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        section {
+            padding: 2em;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 1em;
+            font-family: 'CustomFont', Arial, sans-serif;
+            font-size: 2em;
+        }
+
+        section p, section .project {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .project {
+            margin-bottom: 2em;
+        }
+
+        .about-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .about-details {
+            background-color: hsl(38, 17%, 50%);
+            padding: 20px;
+            color: white;
+            width: calc(50% - 20px);
+            border-radius: 10px;
+            flex: 1 1 300px;
+            height: 900px;
+            font-size: 2em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-details h3, .about-details h4, .about-details p {
+            font-family: 'CustomFont', Arial, sans-serif;
+        }
+
+        .about-photo {
+            flex: 1 1 300px;
+        }
+
+        .about-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="overlay">
+            <h1>My Portfolio</h1>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+        <img src="h.png" alt="Header Image">
+    </header>
+
+    <section id="about">
+        <h2 style="color: #513c1e;">About Me</h2>
+        <div class="about-container">
+            <div class="about-details">
+                <h3>Priyanka B</h3>
+                <h4>Front-End Developer</h4>
+                <h4>Experience</h4>
+                <ul>
+                    <li>was a part of Ecell-Estudio Sastra University</li>
+                    <li>currently a part of an IDS live project</li>
+                </ul>
+                <h4>Education</h4>
+                <ul>
+                    <li>BTech Computer Science Engineering</li>
+                    <ul>
+                        <li>Sastra University</li>
+                        <li>scoring: 7.07cgpa</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="about-photo">
+                <img src="ab.jpg" alt="Priyanka's Photo">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Project 1</h3>
+            <p>Description of project 1.</p>
+        </div>
+        <div class="project">
+            <h3>Project 2</h3>
+            <p>Description of project 2.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <p>Here you can list your skills.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Contact details go here.</p>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+
+            const revealSection = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(revealSection, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

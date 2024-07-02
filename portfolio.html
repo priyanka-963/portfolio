@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>\body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+section {
+    padding: 2em;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+section p, section .project {
+    text-align: center;
+}
+
+section.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.project {
+    margin-bottom: 2em;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>This is the about section. Here you can add some information about yourself.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Project 1</h3>
+            <p>Description of project 1.</p>
+        </div>
+        <div class="project">
+            <h3>Project 2</h3>
+            <p>Description of project 2.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <p>Here you can list your skills.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Contact details go here.</p>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+
+    const revealSection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('hidden');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(revealSection, {
+        threshold: 0.1
+    });
+
+    sections.forEach(section => {
+        section.classList.add('hidden');
+        observer.observe(section);
+    });
+});
+</script>
+</html>
